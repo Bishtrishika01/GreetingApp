@@ -16,7 +16,6 @@ public class GreetingService {
         this.greetingRepository = greetingRepository;
     }
 
-    // Generate greeting message dynamically
     public String getGreeting(String firstName, String lastName) {
         if (firstName != null && lastName != null) {
             return "Hello " + firstName + " " + lastName + "!";
@@ -29,17 +28,22 @@ public class GreetingService {
         }
     }
 
-    // Find a greeting by ID
     public Optional<Greeting> findGreetingById(Long id) {
         return greetingRepository.findById(id);
     }
 
-    // Save a greeting message
     public Greeting saveGreeting(String message) {
         return greetingRepository.save(new Greeting(message));
     }
 
     public List<Greeting> getAllGreetings() {
         return greetingRepository.findAll();
+    }
+
+    public Optional<Greeting> updateGreeting(Long id, String message) {
+        return greetingRepository.findById(id).map(greeting -> {
+            greeting.setMessage(message);
+            return greetingRepository.save(greeting);
+        });
     }
 }

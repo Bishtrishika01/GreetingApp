@@ -45,4 +45,12 @@ public class GreetingController {
     public List<Greeting> getAllGreetings() {
         return greetingService.getAllGreetings();
     }
+
+    // Edit an existing greeting
+    @PutMapping("/{id}")
+    public Map<String, String> updateGreeting(@PathVariable Long id, @RequestParam String message) {
+        Optional<Greeting> updatedGreeting = greetingService.updateGreeting(id, message);
+        return updatedGreeting.map(g -> Map.of("message", g.getMessage()))
+                .orElse(Map.of("error", "Greeting not found"));
+    }
 }
