@@ -4,6 +4,8 @@ import com.example.greetingapp.entity.Greeting;
 import com.example.greetingapp.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class GreetingService {
 
@@ -13,20 +15,26 @@ public class GreetingService {
         this.greetingRepository = greetingRepository;
     }
 
+    // Generate greeting message dynamically
     public String getGreeting(String firstName, String lastName) {
-        String message;
         if (firstName != null && lastName != null) {
-            message = "Hello " + firstName + " " + lastName + "!";
+            return "Hello " + firstName + " " + lastName + "!";
         } else if (firstName != null) {
-            message = "Hello " + firstName + "!";
+            return "Hello " + firstName + "!";
         } else if (lastName != null) {
-            message = "Hello " + lastName + "!";
+            return "Hello " + lastName + "!";
         } else {
-            message = "Hello World!";
+            return "Hello World!";
         }
+    }
 
-        // Save greeting to the database
-        greetingRepository.save(new Greeting(message));
-        return message;
+    // Find a greeting by ID
+    public Optional<Greeting> findGreetingById(Long id) {
+        return greetingRepository.findById(id);
+    }
+
+    // Save a greeting message
+    public Greeting saveGreeting(String message) {
+        return greetingRepository.save(new Greeting(message));
     }
 }
