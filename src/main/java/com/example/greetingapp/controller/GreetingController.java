@@ -18,7 +18,6 @@ public class GreetingController {
         this.greetingService = greetingService;
     }
 
-    // Generate a greeting message dynamically
     @GetMapping
     public Map<String, String> getGreeting(
             @RequestParam(required = false) String firstName,
@@ -26,7 +25,6 @@ public class GreetingController {
         return Map.of("message", greetingService.getGreeting(firstName, lastName));
     }
 
-    // Find a greeting by ID
     @GetMapping("/{id}")
     public Map<String, String> findGreetingById(@PathVariable Long id) {
         Optional<Greeting> greeting = greetingService.findGreetingById(id);
@@ -34,13 +32,11 @@ public class GreetingController {
                 .orElse(Map.of("error", "Greeting not found"));
     }
 
-    // Save a new greeting message
     @PostMapping
     public Greeting saveGreeting(@RequestParam String message) {
         return greetingService.saveGreeting(message);
     }
 
-    // List all greetings
     @GetMapping("/all")
     public List<Greeting> getAllGreetings() {
         return greetingService.getAllGreetings();

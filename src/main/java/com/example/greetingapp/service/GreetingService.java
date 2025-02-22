@@ -36,6 +36,11 @@ public class GreetingService {
         return greetingRepository.save(new Greeting(message));
     }
 
+
+    public List<Greeting> getAllGreetings() {
+        return greetingRepository.findAll();
+    }
+
     public Optional<Greeting> updateGreeting(Long id, String message) {
         return greetingRepository.findById(id).map(greeting -> {
             greeting.setMessage(message);
@@ -43,8 +48,4 @@ public class GreetingService {
         });
     }
 
-
-    public List<Greeting> getAllGreetings() {
-        return greetingRepository.findAll();
-    }
 }
