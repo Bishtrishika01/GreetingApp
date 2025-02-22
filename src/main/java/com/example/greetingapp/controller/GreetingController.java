@@ -48,4 +48,11 @@ public class GreetingController {
         return updatedGreeting.map(g -> Map.of("message", g.getMessage()))
                 .orElse(Map.of("error", "Greeting not found"));
     }
+
+    @DeleteMapping("/{id}")
+    public Map<String, String> deleteGreeting(@PathVariable Long id) {
+        boolean deleted = greetingService.deleteGreeting(id);
+        return deleted ? Map.of("message", "Greeting deleted successfully")
+                : Map.of("error", "Greeting not found");
+    }
 }
