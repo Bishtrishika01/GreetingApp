@@ -46,7 +46,6 @@ public class GreetingController {
         return greetingService.getAllGreetings();
     }
 
-    // Edit an existing greeting
     @PutMapping("/{id}")
     public Map<String, String> updateGreeting(@PathVariable Long id, @RequestParam String message) {
         Optional<Greeting> updatedGreeting = greetingService.updateGreeting(id, message);
