@@ -23,4 +23,3 @@ public class GreetingController {
         return Map.of("message", greetingService.getGreeting(firstName, lastName));
     }
 }
-
