@@ -4,6 +4,7 @@ import com.example.greetingapp.entity.Greeting;
 import com.example.greetingapp.service.GreetingService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -22,7 +23,6 @@ public class GreetingController {
     public Map<String, String> getGreeting(
             @RequestParam(required = false) String firstName,
             @RequestParam(required = false) String lastName) {
-
         return Map.of("message", greetingService.getGreeting(firstName, lastName));
     }
 
@@ -38,5 +38,11 @@ public class GreetingController {
     @PostMapping
     public Greeting saveGreeting(@RequestParam String message) {
         return greetingService.saveGreeting(message);
+    }
+
+    // List all greetings
+    @GetMapping("/all")
+    public List<Greeting> getAllGreetings() {
+        return greetingService.getAllGreetings();
     }
 }
